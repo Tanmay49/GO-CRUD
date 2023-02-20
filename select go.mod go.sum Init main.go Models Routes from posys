@@ -1,0 +1,13 @@
+                                       Table "public.posts"
+   Column   |           Type           | Collation | Nullable |              Default              
+------------+--------------------------+-----------+----------+-----------------------------------
+ id         | bigint                   |           | not null | nextval('posts_id_seq'::regclass)
+ created_at | timestamp with time zone |           |          | 
+ updated_at | timestamp with time zone |           |          | 
+ deleted_at | timestamp with time zone |           |          | 
+ title      | text                     |           |          | 
+ body       | text                     |           |          | 
+Indexes:
+    "posts_pkey" PRIMARY KEY, btree (id)
+    "idx_posts_deleted_at" btree (deleted_at)
+

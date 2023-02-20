@@ -10,6 +10,8 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+
 func LoadEnv() {
 	env := godotenv.Load()
 	if env != nil {
@@ -18,11 +20,13 @@ func LoadEnv() {
 }
 
 func ConnectDB() {
+	var err error
 	dsn := os.Getenv("DB_URL")
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
 	if err != nil {
 		log.Fatal("failed to connect database")
 	}
-
-	db.AutoMigrate(&Models.Post{})
+ 
+	DB.AutoMigrate(&Models.Post{})
 }
